@@ -63,9 +63,21 @@ void print_decryption(char c[], int length)
 
 int main()
 {
+   MESSAGE_LENGTH = message.length();
+
+   encryption = new unsigned int[MESSAGE_LENGTH];
+   decryption = new char[MESSAGE_LENGTH];
+
    Node* n;
-   int p = 11, q = 23, e = 3;
+   int p = 11, q = 17, e = 3;
    int N = p * q;
+
+   for (int i = 0; i < MESSAGE_LENGTH; i++)
+   {
+      char me = message[i]; 
+      int c = (unsigned int) me;
+      encryption[i] = do_exp(c, e, N);
+   }
 
 
    n = extendedEuclid(e, (p - 1) * (q - 1));
@@ -74,7 +86,12 @@ int main()
    if (d < 0)
       d = d + (p-1)*(q-1);
 
-   cout << d << endl;
+   for (int i = 0; i < MESSAGE_LENGTH; i++)
+      decryption[i] = (char)do_exp(encryption[i], d, N);
+
+   cout << message << endl;
+   print_encryption(encryption, MESSAGE_LENGTH);
+   print_decryption(decryption, MESSAGE_LENGTH);
 
    return 0;
 }
