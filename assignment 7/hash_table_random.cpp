@@ -60,7 +60,7 @@ void hash_insert2(char name[], int random_value[])
     {
         hash_table[key].collision++;
         number++;
-        key = (number * number + key)%TABLE_SIZE;
+        key = (number + key)%TABLE_SIZE;
     }
     strcpy(hash_table[key].name, name);
 }
